@@ -82,7 +82,7 @@ type API struct {
 // It also may contain HTTP basic auth username and password like
 // http://username:password@host/api_jsonrpc.php.
 func New(url string) (api *API) {
-	return &API{url: url, c: http.Client{}, UserAgent: "github.com/claranet/zabbix"}
+	return &API{url: url, c: http.Client{}, UserAgent: "go-zabbix-api"}
 }
 
 // SetClient Allows one to use specific http.Client, for example with InsecureSkipVerify transport.
@@ -153,6 +153,7 @@ func (api *API) CallWithErrorParse(method string, params interface{}, result int
 	if err != nil {
 		return
 	}
+	fmt.Println(string(response))
 	err = json.Unmarshal(response, &rawResult)
 	if err != nil {
 		return
