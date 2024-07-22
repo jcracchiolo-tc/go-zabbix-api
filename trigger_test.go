@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	zapi "github.com/jcracchiolo-tc/go-zabbix.api"
+	zapi "github.com/jcracchiolo-tc/go-zabbix-api"
 )
 
 func testCreateTrigger(item *zapi.Item, host *zapi.Host, t *testing.T) *zapi.Trigger {

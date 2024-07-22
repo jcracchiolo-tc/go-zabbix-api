@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/hashicorp/go-version"
-	zapi "github.com/jcracchiolo-tc/go-zabbix.api"
+	zapi "github.com/jcracchiolo-tc/go-zabbix-api"
 )
 
 var (
