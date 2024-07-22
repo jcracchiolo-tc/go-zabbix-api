@@ -3,8 +3,8 @@ package zabbix_test
 import (
 	"testing"
 
-	dd "github.com/claranet/go-zabbix-api"
-	zapi "github.com/claranet/go-zabbix-api"
+	dd "github.com/jcracchiolo-tc/go-zabbix.api"
+	zapi "github.com/jcracchiolo-tc/go-zabbix.api"
 )
 
 func testCreateLLDRule(template *dd.Template, t *testing.T) *dd.LLDRule {

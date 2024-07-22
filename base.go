@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"sync/atomic"
@@ -77,11 +77,11 @@ type API struct {
 	id        int32
 }
 
-// NewAPI Creates new API access object.
+// New Creates new API access object.
 // Typical URL is http://host/api_jsonrpc.php or http://host/zabbix/api_jsonrpc.php.
 // It also may contain HTTP basic auth username and password like
 // http://username:password@host/api_jsonrpc.php.
-func NewAPI(url string) (api *API) {
+func New(url string) (api *API) {
 	return &API{url: url, c: http.Client{}, UserAgent: "github.com/claranet/zabbix"}
 }
 
@@ -120,7 +120,7 @@ func (api *API) callBytes(method string, params interface{}) (b []byte, err erro
 	}
 	defer res.Body.Close()
 
-	b, err = ioutil.ReadAll(res.Body)
+	b, err = io.ReadAll(res.Body)
 	api.printf("Response (%d): %s", res.StatusCode, b)
 	return
 }
@@ -175,6 +175,11 @@ func (api *API) Login(user, password string) (auth string, err error) {
 
 	auth = response.Result.(string)
 	api.Auth = auth
+	return
+}
+
+func (api *API) Logout() (err error) {
+	_, err = api.CallWithError("user.logout", Params{})
 	return
 }
 
